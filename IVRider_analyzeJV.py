@@ -54,12 +54,12 @@ def load_jv_data(file_paths):
 def compute_resistances(voltage, current, Voc, Isc):
     try:
         voc_idx = np.argmin(np.abs(voltage - Voc))
-        range_rs = 5 # Number of points to use for linear regression
-        rs_slope, _, _, _, _ = linregress(voltage[voc_idx-range_rs:voc_idx], current[voc_idx-range_rs:voc_idx])
-        print(current[voc_idx-range_rs:voc_idx])
+        range_rs = 5 # Number of points to use for Rs linear regression
+        rs_slope, _, _, _, _ = linregress(voltage[voc_idx-range_rs:voc_idx+3], current[voc_idx-range_rs:voc_idx+3])
+        print(current[voc_idx-range_rs:voc_idx+3])
         Rs = 1 / rs_slope if rs_slope != 0 else np.nan
 
-        range_rsh = 15 # Number of points to use for linear regression
+        range_rsh = 15 # Number of points to use for Rsh linear regression
         jsc_idx = np.argmin(np.abs(current - Isc))
         rsh_slope, _, _, _, _ = linregress(voltage[jsc_idx:jsc_idx+range_rsh], current[jsc_idx:jsc_idx+range_rsh])
         Rsh = 1 / rsh_slope if rsh_slope != 0 else np.nan
