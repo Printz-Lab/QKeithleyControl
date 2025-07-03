@@ -1,0 +1,21 @@
+name: QKeithley_Control
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.7
+  - numpy
+  - pandas
+  - matplotlib=3.4.3  # Downgraded Matplotlib
+  - scipy
+  - pyserial
+  - pyvisa
+  - pyvisa-py
+  - tk  # Required for Tkinter
+  - openpyxl
+  - xlrd
+  - pyqt  # Install PyQt from Conda, not pip!
+  - pip
+  - pip:
+      - PyQtVisa  # Only install this via pip
